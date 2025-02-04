@@ -220,7 +220,7 @@ Response should  look like below - **Two Groups** - alphas(groupId=1) and zeros(
 
 In the **Cluster** tab of Ratel, the backend should display 3 Zero pods under the "**Zeros**" group and 3 Alpha pods under "**Group #1**," as shown below.
 
-![image.png](Enabling%20or%20Disabling%20High-Availability%20for%20a%20Dgra%2018be0dd4f7368024ba46e8db0f49b457/image.png)
+![image.png](images/Ratel-image-HA.png)
 
 ## Steps to disable High Availability:
 
@@ -435,4 +435,4 @@ Response should  look like below - **Two Groups** - alphas(groupId=1) and zeros(
 
 In Ratel, you can verify that Alpha and Zero Groups have only 1 member.
 
-![image.png](Enabling%20or%20Disabling%20High-Availability%20for%20a%20Dgra%2018be0dd4f7368024ba46e8db0f49b457/image%201.png)
+![image.png](images/Ratel-image.png)
