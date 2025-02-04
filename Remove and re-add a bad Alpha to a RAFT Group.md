@@ -21,7 +21,6 @@ This procedure is needed when one or more alpha pods of a HA cluster go out-of-s
 
 Below steps assume **zerostatefulset-<ldr>** and **alphastatefulset-<ldr>** are the RAFT leaders while `alphastatefulset-x` is the bad Alpha and it needs to be  removed and re-added to the RAFT group.
 
-1. 
 
 ### 1.  **Set the NS variable to point to the faulty cluster**
 
