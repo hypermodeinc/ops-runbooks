@@ -83,8 +83,8 @@ For a cluster with a single tenant, create the following mutation:
 cat << EOF > export.graphql
 mutation {
   export(input: {
-	  format: "RDF", 
-	  destination: "/dgraph/exports",
+          format: "RDF", 
+          destination: "/dgraph/exports",
   }) {
     response {
       code
@@ -101,9 +101,9 @@ EOF
     cat << EOF > export.graphql
     mutation {
       export(input: {
-    	  namespace: -1,
-    	  format: "RDF", 
-    	  destination: "/dgraph/exports",
+          namespace: -1,
+          format: "RDF", 
+          destination: "/dgraph/exports",
       }) {
         response {
           code
@@ -130,10 +130,10 @@ curl --request POST "http:localhost:8080/admin" \
     cat << EOF > export.graphql
     mutation {
       export(input: {
-    	  namespace: -1,
-    	  destination: "/dgraph/exports",
-    	  accessKey: $ACCESS_KEY,
-     	  secretKey: $SECRET_KEY,
+          namespace: -1,
+          destination: "/dgraph/exports",
+          accessKey: $ACCESS_KEY,
+          secretKey: $SECRET_KEY,
       }) {
         response {
           code
@@ -152,8 +152,8 @@ curl --request POST "http:localhost:8080/admin" \
     
     ```yaml
     ACCESS_JWT=curl localhost:8080/admin --header "Content-Type: application/graphql" \
-    	-d 'mutation {login(userId: $USER, password: $PASSWORD, namespace: -1) \
-    	{response {accessJWT refreshJWT}}}' | jq -r '.data.login.response.accessJWT'
+               -d 'mutation {login(userId: $USER, password: $PASSWORD, namespace: -1) \
+               {response {accessJWT refreshJWT}}}' | jq -r '.data.login.response.accessJWT'
     
     ```
     
@@ -161,9 +161,9 @@ curl --request POST "http:localhost:8080/admin" \
     
     ```yaml
     curl --request POST "http:localhost:8080/admin" \
-    	--header "Content-Type: application/graphql" \
-    	--header "X-Dgraph-AccessToken: $ACCESS_JWT" \
-    	--upload-file export.graphql
+         --header "Content-Type: application/graphql" \
+         --header "X-Dgraph-AccessToken: $ACCESS_JWT" \
+         --upload-file export.graphql
     ```
     
     Tail Alpha logs to ensure that all shards received the proposal for the `export` mutation:
@@ -185,7 +185,37 @@ curl --request POST "http:localhost:8080/admin" \
     
     Once completed successfully, check which of the sharded replicas were involved in the export, along with the path for each:
     
-    TODO: To get logs from a Sharded Cloud CLuster
+    Find all Alphas containing the exported data for their respective group:
+    
+    ```bash
+    for pod in $(kubectl get pods | awk '$1 ~ /alpha/ {print $1}'); do
+      echo "Checking pod: $pod..."
+      
+      if kubectl exec -it "$pod" -- test -d /dgraph/exports; then
+        echo "Directory exists: /dgraph/exports/dgraph*"
+      fi
+    done
+    ```
+    
+    Example output:
+    
+    ```bash
+    Checking pod: alphastatefulset-0...
+    Directory exists: /dgraph/exports/dgraph.r180.u0131.1400/
+    
+    Checking pod: alphastatefulset-1...
+    
+    Checking pod: alphastatefulset-2...
+    
+    Checking pod: alphastatefulset-3...
+    
+    Checking pod: alphastatefulset-4...
+    Directory exists: /dgraph/exports/dgraph.r180.u0131.1400/
+    
+    Checking pod: alphastatefulset-5...
+    ```
+    
+    In the example above, the cluster is configured with 2 shards/groups and thus, each shard will contain its exported data within the same directory via. `dgraph.r180.u0131.1400` in the example above. 
     
     ```yaml
     export.go:935] Export DONE for group 2 at timestamp 180.
@@ -195,8 +225,6 @@ curl --request POST "http:localhost:8080/admin" \
     queue.go:330] task 0x18a011e2b: exported files: [dgraph.r180.u0131.1400/g01.rdf.gz dgraph.r180.u0131.1400/g01.schema.gz dgraph.r180.u0131.1400/g01.gql_schema.gz]
     queue.go:241] task 0x18a011e2b: completed successfully
     ```
-    
-    In the example above, the cluster is configured with 2 shards/groups and thus, each shard will contain its exported data within the same directory via. `dgraph.r180.u0131.1400` in the example above. 
     
 
 ### 3. Merge the multiple exported schemas into a single one.
@@ -263,11 +291,11 @@ To cite an example, let’s assume we have the following Group 1 and Shard 2 sch
 [0x0] <dgraph.graphql.schema>:string . 
 [0x0] <dgraph.graphql.p_query>:string @index(sha256) . 
 [0x0] type <dgraph.graphql> {
-	dgraph.graphql.schema
-	dgraph.graphql.xid
+      dgraph.graphql.schema
+      dgraph.graphql.xid
 }
 [0x0] type <dgraph.graphql.persisted_query> {
-	dgraph.graphql.p_query
+      dgraph.graphql.p_query
 }
 ```
 
@@ -277,11 +305,11 @@ To cite an example, let’s assume we have the following Group 1 and Shard 2 sch
 [0x0] <date>:default . 
 [0x0] <amount>:default . 
 [0x0] type <dgraph.graphql> {
-	dgraph.graphql.schema
-	dgraph.graphql.xid
+       dgraph.graphql.schema
+       dgraph.graphql.xid
 }
 [0x0] type <dgraph.graphql.persisted_query> {
-	dgraph.graphql.p_query
+      dgraph.graphql.p_query
 }
 ```
 
