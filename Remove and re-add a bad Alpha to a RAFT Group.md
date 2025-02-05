@@ -78,30 +78,6 @@ Response would be like below. Note that this is for non-HA Cluster. In case of H
       "forceGroupId": false
     }
   },
-  "removed": [
-    {
-      "id": "1",
-      "groupId": 1,
-      "addr": "alphastatefulset-1.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
-      "leader": false,
-      "amDead": false,
-      "lastUpdate": "1738728953",
-      "learner": false,
-      "clusterInfoOnly": false,
-      "forceGroupId": false
-    },
-    {
-      "id": "4",
-      "groupId": 1,
-      "addr": "alphastatefulset-1.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
-      "leader": false,
-      "amDead": false,
-      "lastUpdate": "0",
-      "learner": false,
-      "clusterInfoOnly": false,
-      "forceGroupId": false
-    }
-  ],
   "zeros": {
     "1": {
       "id": "1",
