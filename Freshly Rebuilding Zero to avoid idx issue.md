@@ -80,7 +80,7 @@ kubectl delete pvc -l app=dgraph-zero -n $NS
 ### 6. Scale Zero STS to 3 Replicas
 
 ```java
-kubectl scale --replicas=0 sts zerostatefulset -n $NS
+kubectl scale --replicas=3 sts zerostatefulset -n $NS
 ```
 
 ### 7.  Assign Max Values on Zero Leader and verify that max values are correct
