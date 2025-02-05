@@ -44,25 +44,92 @@ Response would be like below. Note that this is for non-HA Cluster. In case of H
 ```yaml
 {
   "alphas": {
-    "1": {
-      "**id**": "1",
-      "**groupId**": 1,
-      "addr": "alphastatefulset-0.dgraph-alpha-service.cluster-0x82b0663f5.svc.cluster.local:7080",
-      "**leader**": true,
+    "2": {
+      "id": "2",
+      "groupId": 1,
+      "addr": "alphastatefulset-2.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
+      "leader": true,
       "amDead": false,
-      "lastUpdate": "1738179285",
+      "lastUpdate": "1738729115",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    },
+    "3": {
+      "id": "3",
+      "groupId": 1,
+      "addr": "alphastatefulset-0.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
+      "leader": false,
+      "amDead": false,
+      "lastUpdate": "0",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    },
+    "5": {
+      "id": "5",
+      "groupId": 1,
+      "addr": "alphastatefulset-1.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
+      "leader": false,
+      "amDead": false,
+      "lastUpdate": "0",
       "learner": false,
       "clusterInfoOnly": false,
       "forceGroupId": false
     }
   },
-  "removed": [],
+  "removed": [
+    {
+      "id": "1",
+      "groupId": 1,
+      "addr": "alphastatefulset-1.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
+      "leader": false,
+      "amDead": false,
+      "lastUpdate": "1738728953",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    },
+    {
+      "id": "4",
+      "groupId": 1,
+      "addr": "alphastatefulset-1.dgraph-alpha-service.cluster-0x82b275415.svc.cluster.local:7080",
+      "leader": false,
+      "amDead": false,
+      "lastUpdate": "0",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    }
+  ],
   "zeros": {
     "1": {
-      "**id**": "1",
-      "**groupId**": 0,
-      "addr": "zerostatefulset-0.dgraph-zero-service.cluster-0x82b0663f5.svc.cluster.local:5080",
-      "**leader**": true,
+      "id": "1",
+      "groupId": 0,
+      "addr": "zerostatefulset-0.dgraph-zero-service.cluster-0x82b275415.svc.cluster.local:5080",
+      "leader": true,
+      "amDead": false,
+      "lastUpdate": "0",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    },
+    "2": {
+      "id": "2",
+      "groupId": 0,
+      "addr": "zerostatefulset-1.dgraph-zero-service.cluster-0x82b275415.svc.cluster.local:5080",
+      "leader": false,
+      "amDead": false,
+      "lastUpdate": "0",
+      "learner": false,
+      "clusterInfoOnly": false,
+      "forceGroupId": false
+    },
+    "3": {
+      "id": "3",
+      "groupId": 0,
+      "addr": "zerostatefulset-2.dgraph-zero-service.cluster-0x82b275415.svc.cluster.local:5080",
+      "leader": false,
       "amDead": false,
       "lastUpdate": "0",
       "learner": false,
